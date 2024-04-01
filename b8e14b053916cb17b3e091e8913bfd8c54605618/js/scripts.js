@@ -104,7 +104,7 @@ $(document).ready(function () {
             } else {
                 $('section.navigation').removeClass('fixed');
                 $('header').css({
-                    "border-bottom": "solid 1px rgba(255, 255, 255, 0.2)",
+                    "border-bottom": "none",
                     "padding": "50px 0"
                 });
                 $('header .member-actions').css({
@@ -184,23 +184,23 @@ $(document).ready(function () {
         },
         data: {
             // Event title
-            title: "Ram and Antara's Wedding",
+            title: "Andrea and Eric's Wedding",
 
             // Event start date
-            start: new Date('Nov 27, 2017 10:00'),
+            start: new Date('Jun 15, 2024 5:00'),
 
             // Event duration (IN MINUTES)
             // duration: 120,
 
             // You can also choose to set an end time
             // If an end time is set, this will take precedence over duration
-            end: new Date('Nov 29, 2017 00:00'),
+            end: new Date('Jun 15, 2024 00:00'),
 
             // Event Address
-            address: 'ITC Fortune Park Hotel, Kolkata',
+            address: 'NYC',
 
             // Event Description
-            description: "We can't wait to see you on our big day. For any queries or issues, please contact Mr. Amit Roy at +91 9876543210."
+            description: "Placeholder"
         }
     });
 
@@ -241,32 +241,39 @@ $(document).ready(function () {
 
 // Google map
 function initMap() {
-    var location = {lat: 22.5932759, lng: 88.27027720000001};
+    var ceremony = {lat: 40.77804411931773, lng: -73.97204924716767};
+    var reception = {lat: 40.728778983174756, lng: -74.00723949987122}
+    var manhattan = {lat: 40.7592992866917, lng: -73.9827253182398}
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: 15,
-        center: location,
+        zoom: 11,
+        center: manhattan,
         scrollwheel: false
     });
 
     var marker = new google.maps.Marker({
-        position: location,
-        map: map
+        position: ceremony,
+        map: map,
+    });
+
+    var marker2 = new google.maps.Marker({
+        position: reception,
+        map: map,
     });
 }
 
-function initBBSRMap() {
-    var la_fiesta = {lat: 20.305826, lng: 85.85480189999998};
-    var map = new google.maps.Map(document.getElementById('map-canvas'), {
-        zoom: 15,
-        center: la_fiesta,
-        scrollwheel: false
-    });
-
-    var marker = new google.maps.Marker({
-        position: la_fiesta,
-        map: map
-    });
-}
+// function initBBSRMap() {
+//     var la_fiesta = {lat: 40.77804411931773, lng: -73.97204924716767};
+//     var map = new google.maps.Map(document.getElementById('map-canvas'), {
+//         zoom: 15,
+//         center: la_fiesta,
+//         scrollwheel: false
+//     });
+//
+//     var marker = new google.maps.Marker({
+//         position: la_fiesta,
+//         map: map
+//     });
+// }
 
 // alert_markup
 function alert_markup(alert_type, msg) {
