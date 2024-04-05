@@ -111,7 +111,6 @@ body {
 	<script type="text/javascript">
 	"use strict";
 	function loadPage(pwd) {
-
 		var hash= pwd;
 		hash= Sha1.hash(pwd);
 		var url= hash + "/index.html";
@@ -125,7 +124,6 @@ body {
 
 			},
 			error : function(xhr, ajaxOptions, thrownError) {
-
 
 				parent.location.hash= hash;
 
