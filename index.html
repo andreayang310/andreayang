@@ -110,34 +110,32 @@ body {
 	 <script type="text/javascript" src="https://rawcdn.githack.com/chrisveness/crypto/7067ee62f18c76dd4a9d372a00e647205460b62b/sha1.js"></script>
 	<script type="text/javascript">
 	"use strict";
-	function loadPage(pwd) {
-		var hash= pwd;
-		hash= Sha1.hash(pwd);
-		var url= hash + "/index.html";
-
-		$.ajax({
-			url : url,
-			dataType : "html",
-			success : function(data) {
-
-				window.location= url;
-
-			},
-			error : function(xhr, ajaxOptions, thrownError) {
-
-				parent.location.hash= hash;
-
-				//$("#wrongPassword").show();
-				$("#password").attr("placeholder","wrong password");
-				$("#password").val("");
-			}
-		});
-	}
-
-
 
   $(document).ready(function(){
-    $('#password').focus();
+    function loadPage(pwd) {
+  		var hash= pwd;
+  		hash= Sha1.hash(pwd);
+  		var url= hash + "/index.html";
+
+  		$.ajax({
+  			url : url,
+  			dataType : "html",
+  			success : function(data) {
+
+  				window.location= url;
+
+  			},
+  			error : function(xhr, ajaxOptions, thrownError) {
+
+  				parent.location.hash= hash;
+
+  				//$("#wrongPassword").show();
+  				$("#password").attr("placeholder","wrong password");
+  				$("#password").val("");
+  			}
+  		});
+  	}
+    
     $("#loginbutton").on("click", function() {
   		loadPage($("#password").val());
   	});
@@ -151,7 +149,6 @@ body {
     });
     $("#password").focus();
 });
-
 
 
 	</script>
