@@ -96,7 +96,7 @@ body {
                  <label>Password</label>
 								 <input type="password" class="form-control" id="password" placeholder="Password">
               </div>
-							<button type="button" id="loginbutton" class="btn btn-primary">Submit</button>
+							<button type="submit" id="loginbutton" class="btn btn-primary">Submit</button>
 							<p id="wrongPassword" style="display: none">wrong password</p>
            </form>
         </div>
@@ -136,6 +136,9 @@ body {
 
 
 	$("#loginbutton").on("click", function() {
+		loadPage($("#password").val());
+	});
+  $("#loginbutton").submit(function() {
 		loadPage($("#password").val());
 	});
 	$("#password").keypress(function(e) {
