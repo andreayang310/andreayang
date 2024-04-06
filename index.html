@@ -135,18 +135,24 @@ body {
 	}
 
 
-	// $("#loginbutton").on("click", function() {
-	// 	loadPage($("#password").val());
-	// });
-  $("#loginbutton").submit(function() {
-		loadPage($("#password").val());
-	});
-	$("#password").keypress(function(e) {
-		if (e.which == 13) {
-			loadPage($("#password").val());
-		}
-	});
-	$("#password").focus();
+
+  $(document).ready(function(){
+    $('#password').focus();
+    $("#loginbutton").on("click", function() {
+  		loadPage($("#password").val());
+  	});
+    $("#loginbutton").submit(function() {
+      loadPage($("#password").val());
+    });
+    $("#password").keypress(function(e) {
+      if (e.which == 13) {
+        loadPage($("#password").val());
+      }
+    });
+    $("#password").focus();
+});
+
+
 
 	</script>
 
