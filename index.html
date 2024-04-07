@@ -96,7 +96,7 @@ body {
                <label>Password</label>
 							 <input type="password" class="form-control" id="password" placeholder="Password">
             </div>
-						<button type="submit" id="loginbutton" class="btn btn-primary">Submit</button>
+						<button type="submit" id="button" class="btn btn-primary">Submit</button>
 						<p id="wrongPassword" style="display: none">wrong password</p>
          </form>
       </div>
@@ -113,45 +113,46 @@ body {
 	 <script type="text/javascript" src="https://rawcdn.githack.com/chrisveness/crypto/7067ee62f18c76dd4a9d372a00e647205460b62b/sha1.js"></script>
 	<script type="text/javascript">
 	"use strict";
-  function loadPage(pwd) {
+        var button = document.querySelectorAll('[data-id="button"]')
+        var password = document.querySelectorAll('[data-id="password"]')
 
-    var hash= pwd;
-    hash= Sha1.hash(pwd);
-    var url= hash + "/index.html";
+        function login(secret) {
+            var hash = sha1(secret)
+            var url = hash + "/index.html"
+            var alert = document.querySelectorAll('[data-id="alert"]')
 
-    $.ajax({
-      url : url,
-      dataType : "html",
-      success : function(data) {
+            var request = new XMLHttpRequest()
+            request.open('GET', url, true)
 
-        window.location= url;
+            request.onload = function () {
+                if (request.status >= 200 && request.status < 400) {
+                    window.location = url
+                } else {
+                    parent.location.hash = hash
+                    alert[0].style.display = 'block'
+                    password[0].setAttribute('placeholder', 'Incorrect password')
+                    password[0].value = ''
+                }
+            }
+            request.onerror = function () {
+                parent.location.hash = hash
+                alert[0].style.display = 'block'
+                password[0].setAttribute('placeholder', 'Incorrect password')
+                password[0].value = ''
+            }
+            request.send()
+        }
 
-      },
-      error : function(xhr, ajaxOptions, thrownError) {
+        button[0].addEventListener("click", function () {
+            login(password[0].value)
+        })
 
-
-        parent.location.hash= hash;
-
-        //$("#wrongPassword").show();
-        $("#password").attr("placeholder","wrong password");
-        $("#password").val("");
-      }
-    });
-  }
-
-  $(document).ready(function () {
-  	$("#loginbutton").on("click", function() {
-  		loadPage($("#password").val());
-  	});
-  	$("#password").keypress(function(e) {
-  		if (e.which == 13) {
-
-  			loadPage($("#password").val());
-  		}
-  	});
-  	$("#password").focus();
-  });
-
+        document.onkeydown = function (e) {
+            e = e || window.event
+            if (e.keyCode == 13) {
+                login(password[0].value)
+            }
+        }
 	</script>
 
 </body>
