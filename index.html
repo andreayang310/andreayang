@@ -40,7 +40,6 @@ body {
     .login-form{
         margin-top: 10%;
     }
-
     .register-form{
         margin-top: 10%;
     }
@@ -49,7 +48,6 @@ body {
     .main{
         margin-left: 40%;
     }
-
     .sidenav{
         width: 40%;
         position: fixed;
@@ -57,11 +55,9 @@ body {
         top: 0;
         left: 0;
     }
-
     .login-form{
         margin-top: 80%;
     }
-
     .register-form{
         margin-top: 20%;
     }
@@ -81,44 +77,40 @@ body {
 </style>
 
 <body>
+  <div class="sidenav">
+       <div class="login-main-text">
+          <h2>Hello there :)</h2>
+          <p>If you're in the right place, you should've been given a password</p>
+       </div>
+  </div>
 
-<div class="sidenav">
-     <div class="login-main-text">
-        <h2>Hello there :)</h2>
-        <p>If you're in the right place, you should've been given a password</p>
+  <div class="main">
+     <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+           <form>
+              <div class="form-group">
+                 <label for="password">Password</label>
+                 <input type="password" class="form-control" id="password" placeholder="Password">
+              </div>
+  						<button type="submit" id="loginbutton" class="btn btn-primary">Submit</button>
+  						<p id="wrongPassword" style="display: none">wrong password</p>
+           </form>
+        </div>
      </div>
-</div>
-
-<div class="main">
-   <div class="col-md-6 col-sm-12">
-      <div class="login-form">
-         <form>
-            <div class="form-group">
-               <label for="password">Password</label>
-               <input type="password" class="form-control" id="password" placeholder="Password">
-            </div>
-						<button type="submit" id="loginbutton" class="btn btn-primary">Submit</button>
-						<p id="wrongPassword" style="display: none">wrong password</p>
-         </form>
-      </div>
-   </div>
-</div>
-
-
-
+  </div>
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="sha1.js"></script>
   <script type="text/javascript">
 	"use strict";
   function loadPage(pwd) {
     console.log("in loadpage");
     var hash= pwd;
     hash= Sha1.hash(pwd);
+    console.log("after hash");
     var url= hash + "/index.html";
 
     $.ajax({
@@ -151,6 +143,10 @@ body {
   		}else{
         console.log("typing");
       }
+  	});
+    $("#loginbutton").on("submit", function() {
+  		loadPage($("#password").val());
+      console.log("submit");
   	});
   });
 
