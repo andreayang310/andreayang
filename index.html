@@ -88,20 +88,20 @@ body {
      </div>
 </div>
 
-  <div class="main">
-     <div class="col-md-6 col-sm-12">
-        <div class="login-form">
-           <form>
-              <div class="form-group">
-                 <label>Password</label>
-								 <input type="password" class="form-control" id="password" placeholder="Password">
-              </div>
-							<button type="submit" id="loginbutton" class="btn btn-primary">Submit</button>
-							<p id="wrongPassword" style="display: none">wrong password</p>
-           </form>
-        </div>
-     </div>
-  </div>
+<div class="main">
+   <div class="col-md-6 col-sm-12">
+      <div class="login-form">
+         <form>
+            <div class="form-group">
+               <label>Password</label>
+							 <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+						<button type="submit" id="loginbutton" class="btn btn-primary">Submit</button>
+						<p id="wrongPassword" style="display: none">wrong password</p>
+         </form>
+      </div>
+   </div>
+</div>
 
 
 
@@ -113,41 +113,47 @@ body {
 	 <script type="text/javascript" src="https://rawcdn.githack.com/chrisveness/crypto/7067ee62f18c76dd4a9d372a00e647205460b62b/sha1.js"></script>
 	<script type="text/javascript">
 	"use strict";
-	function loadPage(pwd) {
-		var hash= pwd;
-		hash= Sha1.hash(pwd);
-		var url= hash + "/index.html";
 
-		$.ajax({
-			url : url,
-			dataType : "html",
-			success : function(data) {
-				window.location= url;
-			},
-			error : function(xhr, ajaxOptions, thrownError) {
-				parent.location.hash= hash;
-				//$("#wrongPassword").show();
-				$("#password").attr("placeholder","wrong password");
-				$("#password").val("");
-			}
-		});
-	}
 
-  $(document).ready(function(){
-    $("#loginbutton").on("click", function() {
+  $(document).ready(function () {
+    function loadPage(pwd) {
+
+  		var hash= pwd;
+  		hash= Sha1.hash(pwd);
+  		var url= hash + "/index.html";
+
+  		$.ajax({
+  			url : url,
+  			dataType : "html",
+  			success : function(data) {
+
+  				window.location= url;
+
+  			},
+  			error : function(xhr, ajaxOptions, thrownError) {
+
+
+  				parent.location.hash= hash;
+
+  				//$("#wrongPassword").show();
+  				$("#password").attr("placeholder","wrong password");
+  				$("#password").val("");
+  			}
+  		});
+  	}
+
+
+  	$("#loginbutton").on("click", function() {
   		loadPage($("#password").val());
   	});
-    $("#loginbutton").submit(function() {
-      loadPage($("#password").val());
-    });
-    $("#password").keypress(function(e) {
-      if (e.which == 13) {
-        loadPage($("#password").val());
-      }
-    });
-    $("#password").focus();
-});
+  	$("#password").keypress(function(e) {
+  		if (e.which == 13) {
 
+  			loadPage($("#password").val());
+  		}
+  	});
+  	$("#password").focus();
+  });
 
 	</script>
 
