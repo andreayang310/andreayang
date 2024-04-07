@@ -107,10 +107,8 @@ body {
   <script type="text/javascript">
 	"use strict";
   function loadPage(pwd) {
-    console.log("in loadpage");
     var hash= pwd;
     hash= Sha1.hash(pwd);
-    console.log("after hash");
     var url= hash + "/index.html";
 
     $.ajax({
@@ -121,12 +119,11 @@ body {
         console.log("success");
       },
       error: function(xhr, ajaxOptions, thrownError) {
-        parent.location.hash= hash;
+        // parent.location.hash= hash;
         console.log("error");
         //$("#wrongPassword").show();
         $("#password").attr("placeholder","wrong password");
         $("#password").val("");
-        $("#password").focus();
       }
     });
   }
@@ -134,20 +131,16 @@ body {
   $(document).ready(function () {
   	$("#loginbutton").on("click", function() {
   		loadPage($("#password").val());
-      console.log("click");
   	});
   	$("#password").keypress(function(e){
   		if (e.which == 13) {
   			loadPage($("#password").val());
-        console.log("enter");
-  		}else{
-        console.log("typing");
-      }
+  		}
   	});
     $("#loginbutton").on("submit", function() {
   		loadPage($("#password").val());
-      console.log("submit");
   	});
+    $("#password").focus();
   });
 
 	</script>
