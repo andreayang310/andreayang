@@ -110,27 +110,22 @@ body {
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	 <script type="text/javascript" src="https://rawcdn.githack.com/chrisveness/crypto/7067ee62f18c76dd4a9d372a00e647205460b62b/sha256.js"></script>
+	 <script type="text/javascript" src="https://rawcdn.githack.com/chrisveness/crypto/7067ee62f18c76dd4a9d372a00e647205460b62b/sha1.js"></script>
 	<script type="text/javascript">
 	"use strict";
 	function loadPage(pwd) {
 		var hash= pwd;
-		hash= Sha256.hash(pwd);
+		hash= Sha1.hash(pwd);
 		var url= hash + "/index.html";
 
 		$.ajax({
 			url : url,
 			dataType : "html",
 			success : function(data) {
-
 				window.location= url;
-
 			},
 			error : function(xhr, ajaxOptions, thrownError) {
-
-
 				parent.location.hash= hash;
-
 				//$("#wrongPassword").show();
 				$("#password").attr("placeholder","wrong password");
 				$("#password").val("");
@@ -138,17 +133,21 @@ body {
 		});
 	}
 
+  $(document).ready(function(){
+    $("#loginbutton").on("click", function() {
+  		loadPage($("#password").val());
+  	});
+    $("#loginbutton").submit(function() {
+      loadPage($("#password").val());
+    });
+    $("#password").keypress(function(e) {
+      if (e.which == 13) {
+        loadPage($("#password").val());
+      }
+    });
+    $("#password").focus();
+});
 
-	$("#loginbutton").on("click", function() {
-		loadPage($("#password").val());
-	});
-	$("#password").keypress(function(e) {
-		if (e.which == 13) {
-
-			loadPage($("#password").val());
-		}
-	});
-	$("#password").focus();
 
 	</script>
 
