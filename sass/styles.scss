@@ -41,6 +41,7 @@ body {
   font-weight: $light;
   color: $txt-primary;
   -webkit-text-size-adjust: 100%;
+  margin: 0px;
   //fix for iOS
 }
 *:focus {
